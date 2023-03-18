@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+:root {
+    --main-color: darkorange;
+    --main-font: "Montserrat";
+}
+input {
+    border: none;
+}
+h1 {
+    font-family: var(--main-font);
+    color: var(--main-color);
+}
+button {
+    color: var(--main-color);
+    font-size: xx-large;
+    background: white;
+    border-radius: 100%;
+    text-align: center;
+    border-style: solid;
+    width: 50px;
+    height: 50px;
+    border-color: var(--main-color);
+}
+.lastQuiz{
+    margin-top: 40px;
+}
+.lastQuiz >p{
+    font-family: var(--main-font);
+}
+.lastQuiz>div{
+    display: flex;
+    padding-left: 20px;
+}
+.lastQuiz>div>div{
+    width: 80px;
+    margin-right: 20px;
+    border: 1px solid var(--main-color);
+    border-radius: 20px;
+    height: 100px;
+}

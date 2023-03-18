@@ -7,10 +7,8 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const secret = 'bipE';
 
-
-app.post('/',jsonParser, (req,res) => {
-    console.log(req.body)
-    res.json({serverResponse: 'ok'})
+app.post('/sendQuiz', jsonParser, (req,res) => {
+    console.log(req.body);
 })
 
 
