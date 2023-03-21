@@ -11,6 +11,9 @@ class Question extends React.Component {
                 <QueBox num={'0'} />
                 <QueBox num={'1'} />
                 <QueBox num={'2'} />
+                <div className='submitBox'>
+                    <button>Отправить ответы</button>
+                </div>
             </div>
         )
     }
@@ -25,14 +28,18 @@ class QueBox extends React.Component {
         return (
             <div className='questionBox'>
                 <p>Текст Вопроса</p>
-                <input type='radio' id={"inputQuestion1" + this.num} name={'anwear' + `${this.num}`} />
-                <label for={"inputQuestion1" + this.num}>Вариант А</label>
-                <br></br>
-                <input type='radio' id={"inputQuestion2" + this.num} name={'anwear' + `${this.num}`} />
-                <label for={"inputQuestion2" + this.num}>Вариант Б</label>
-                <br></br>
-                <input type='radio' id={"inputQuestion3" + this.num} name={'anwear' + `${this.num}`} />
-                <label for={"inputQuestion3" + this.num}>Вариант В</label>
+                <div>
+                    <input type='radio' id={"inputQuestion1" + this.num} name={'anwear' + `${this.num}`} />
+                    <label htmlFor={"inputQuestion1" + this.num}>Вариант А</label>
+                </div>
+                <div>
+                    <input type='radio' id={"inputQuestion2" + this.num} name={'anwear' + `${this.num}`} />
+                    <label htmlFor={"inputQuestion2" + this.num}>Вариант Б</label>
+                </div>
+                <div>
+                    <input type='radio' id={"inputQuestion3" + this.num} name={'anwear' + `${this.num}`} />
+                    <label htmlFor={"inputQuestion3" + this.num}>Вариант В</label>
+                </div>
             </div>
         )
     }

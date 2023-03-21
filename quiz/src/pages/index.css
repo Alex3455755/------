@@ -11,7 +11,7 @@ h1 {
     font-family: var(--main-font);
     color: var(--main-color);
 }
-button {
+.container>button {
     color: var(--main-color);
     font-size: xx-large;
     background: white;
