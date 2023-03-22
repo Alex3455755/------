@@ -7,12 +7,13 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const secret = 'bipE';
 
-app.post('/sendQuiz', jsonParser, (req,res) => {
+app.post('/form', jsonParser, (req, res) => {
     console.log(req.body);
-})
+    res.json({mesage: 'ok'});
+});
 
 
-app.get('/*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend/app/public/index.html'));
 });
 

@@ -1,0 +1,51 @@
+:root {
+    --main-color: darkorange;
+    --sub-color: rgb(214, 129, 26);
+    --main-font: "Montserrat";
+}
+header {
+    height: 60px;
+    background: white;
+    border-bottom: 3px solid var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+    box-sizing: border-box;
+}
+.profil {
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    border: 3px solid var(--main-color);
+    position: relative;
+}
+.profil:hover {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+}
+.modal{
+    padding: 20px 0 0 20px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 40px;
+    right: 25px;
+    background: white;
+    border-radius: 10px;
+    height: 150px;
+    width: 400px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+    z-index: 1;
+}
+.modal>p{
+    color: var(--main-color);
+    margin-bottom: 10px;
+}
+.modal>a{
+    color: red;
+}
+.modalDefault{
+    height: 300px;
+}
+.modalDefault>input{
+    border: 2px solid var(--main-color);
+}

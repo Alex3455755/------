@@ -6,9 +6,9 @@ import {
   BrowserRouter as Router,
   Route, Routes
 } from 'react-router-dom';
+import ResultPage from './pages/resultPage';
 
-document.addEventListener('dragover', ev => ev.preventDefault())
-document.addEventListener('drop', ev => ev.preventDefault())
+window.userSign = false;
 
 ReactDOM.createRoot(
   document.getElementById("root")
@@ -17,6 +17,7 @@ ReactDOM.createRoot(
     <Router>
       <div>
         <Routes>
+          <Route path='/resultPage' element={<ResultPage />} />
           <Route path='/question' element={<Question />} />
           <Route path="/" element={<Main />} />
         </Routes>

@@ -1,18 +1,22 @@
 import React from 'react';
-import classes from './question.css'
+import classes from './question.css';
+import Menu from './components/menu';
 
 class Question extends React.Component {
     render() {
         return (
-            <div className='main'>
-                <div className='title'>
-                    <h2>Название опроса</h2>
-                </div>
-                <QueBox num={'0'} />
-                <QueBox num={'1'} />
-                <QueBox num={'2'} />
-                <div className='submitBox'>
-                    <button>Отправить ответы</button>
+            <div className='container'>
+                <Menu />
+                <div className='main'>
+                    <div className='title'>
+                        <h2>Название опроса</h2>
+                    </div>
+                    <QueBox num={'0'} />
+                    <QueBox num={'1'} />
+                    <QueBox num={'2'} />
+                    <div className='submitBox'>
+                        <button>Отправить ответы</button>
+                    </div>
                 </div>
             </div>
         )

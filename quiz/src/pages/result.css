@@ -1,0 +1,40 @@
+#resultBox {
+    height: 50vw;
+    margin-top: -60px;
+    position: relative;
+}
+.grade {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    height: 200px;
+    width: 200px;
+    padding: 2px;
+    border-radius: 100%;
+    font-size: 5em;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+}
+#resultBox>p{
+    position: absolute;
+    top: 320px;
+    left: 178px;
+    font-size: 2em;
+}
+.five{
+    border: 4px solid rgb(117, 254, 0);
+    color: rgb(117, 254, 0);
+}
+.four{
+    border: 4px solid rgb(92, 193, 3);
+    color: rgb(92, 193, 3);
+}
+.three{
+    border: 4px solid rgb(239, 132, 9);
+    color: rgb(239, 132, 9);
+}
+.two{
+    border: 4px solid rgb(213, 1, 1);
+    color: rgb(213, 1, 1);
+}

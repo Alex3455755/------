@@ -1,6 +1,7 @@
 
 import classes from './index.css';
 import React from 'react';
+import Menu from './components/menu';
 
 
 class Main extends React.Component {
@@ -9,7 +10,6 @@ class Main extends React.Component {
       <div className="container">
         <Menu />
         <button>+</button>
-        
         <div className='lastQuiz'>
         <p>Последние опросы</p>
          <div>
@@ -21,19 +21,6 @@ class Main extends React.Component {
     );
   }
 }
-
-class Menu extends React.Component {
-  render() {
-    return (
-      <header>
-        <h1>Quiz</h1>
-        <div></div>
-        <div></div>
-      </header>
-    )
-  }
-}
-
 
 
 export default Main;
