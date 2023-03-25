@@ -123,7 +123,11 @@ header {
 .text-field_floating-2 {
     position: relative;
 }
-
+.modalReg{
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+}
 .text-field_floating-2 .text-field__input {
     height: calc(2.5rem + 2px);
     padding: 0.5rem 0.75rem;
@@ -157,7 +161,10 @@ header {
     top: 0;
     transform: translateY(-50%) scale(0.75);
 }
-
+.text-field_floating-2:has(.text-field__message)>.text-field__input:focus ~ .text-field__label,
+.text-field_floating-2:has(.text-field__message) .text-field__input:not(:placeholder-shown) ~ .text-field__label {
+    top: 50%;
+}
 /* validation */
 .text-field__wrapper {
     margin-bottom: 1.25rem;
@@ -192,8 +199,13 @@ header {
     box-shadow: 0 0 0 0.25rem rgb(25 135 84 / 25%);
 }
 
+.text-field_floating-2:has(.text-field__message)>label{
+    top: 70%;
+}
+
 .text-field__message {
-    display: none;
+    margin-bottom: 5px;
+    margin-left: 5px;
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875rem;
