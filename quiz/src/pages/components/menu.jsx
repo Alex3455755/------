@@ -50,7 +50,7 @@ class ModalRegistred extends React.Component {
         super(props)
         this.fn = props.fn;
         this.closeModal = props.closeModal
-        this.state = { loginValid: '', passwordValid: '', disabledBtn: true }
+        this.state = { loginValid: '', passwordValid: '', disabledBtn: true ,text: 'Пароль должен состоять из букв латинского алфавита цифр и специальных символов'}
     }
     sendForm = () => {
         fetch('/signUp', {
@@ -69,6 +69,8 @@ class ModalRegistred extends React.Component {
                     window.userSign = true;
                     document.cookie = data.jwt;
                     this.closeModal(data.name);
+                }else{
+                    this.setState({text: data.message});
                 }
             })
     }
@@ -76,8 +78,6 @@ class ModalRegistred extends React.Component {
         if (target.type === 'text') {
             const a = 'loginValid';
             if (target.value.length < 7) {
-                console.log('login')
-                console.log(a)
                 this.setState({ [a]: 'text-field__input_invalid' });
             } else {
                 this.setState({ [a]: 'text-field__input_valid' });
@@ -99,12 +99,11 @@ class ModalRegistred extends React.Component {
     render() {
         return (
             <div className='modal modalDefault modalReg'>
+                <div className="text-field__message">{this.state.text}</div>
                 <div className="text-field__wrapper">
                     <div className="text-field text-field_floating-2">
-                        <div className="text-field__message">Пароль должен состоять из букв латинского алфавита цифр и специальных символов</div>
                         <input className={"text-field__input " + this.state.loginValid} type="text" name="city" id="loginReg" placeholder="Moscow" onChange={this.validInput} />
                         <label className="text-field__label" htmlFor="city">Логин</label>
-
                     </div>
                 </div>
                 <div className="text-field__wrapper">
@@ -158,7 +157,6 @@ class ModalDefault extends React.Component {
         if (event.target.id === 'login') {
             obj = 'loginValid';
         }
-        console.log(this.state);
         if (event.target.value.length < 7) {
             event.target.classList.remove('text-field__input_valid')
             event.target.classList.add('text-field__input_invalid');
