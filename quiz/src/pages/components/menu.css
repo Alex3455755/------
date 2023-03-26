@@ -156,13 +156,25 @@ header {
     color: transparent;
 }
 
+.modalDefault .text-field_floating-2:has(.text-field__message) .text-field__label{
+    top: 67%;
+}
+
+.modalReg .text-field_floating-2:has(.text-field__message) .text-field__label{
+    top: 75%;
+}
+
 .text-field_floating-2 .text-field__input:focus ~ .text-field__label,
 .text-field_floating-2 .text-field__input:not(:placeholder-shown) ~ .text-field__label {
     top: 0;
     transform: translateY(-50%) scale(0.75);
 }
-.text-field_floating-2:has(.text-field__message)>.text-field__input:focus ~ .text-field__label,
-.text-field_floating-2:has(.text-field__message) .text-field__input:not(:placeholder-shown) ~ .text-field__label {
+.modalDefault .text-field_floating-2:has(.text-field__message)>.text-field__input:focus ~ .text-field__label,
+.modalDefault .text-field_floating-2:has(.text-field__message) .text-field__input:not(:placeholder-shown) ~ .text-field__label {
+    top: 40%;
+}
+.modalReg .text-field_floating-2:has(.text-field__message)>.text-field__input:focus ~ .text-field__label,
+.modalReg .text-field_floating-2:has(.text-field__message) .text-field__input:not(:placeholder-shown) ~ .text-field__label {
     top: 50%;
 }
 /* validation */
@@ -210,6 +222,13 @@ header {
     margin-top: 0.25rem;
     font-size: 0.875rem;
     color: #dc3545;
+}
+
+.modalDefault .text-field__message{
+    height: 18px;
+}
+.modalReg .text-field__message{
+    height: auto;
 }
 
 .text-field__message_valid {

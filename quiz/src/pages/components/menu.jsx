@@ -4,17 +4,20 @@ import classes from './menu.css'
 class Menu extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { show: false }
+        this.state = { show: false, login: '', }
     }
     showModal(logic) {
         if (!logic) {
             return null
         } else {
-            return window.userSign ? <ModalLogin /> : <ModalDefault />
+            return window.userSign ? <ModalLogin name={this.state.login} /> : <ModalDefault fn={this.callBack} />
         }
     }
     setModal = () => {
         this.setState({ show: !this.state.show })
+    }
+    callBack = (str) => {
+        this.setState({ show: false, login: str });
     }
     render() {
         return (
@@ -28,10 +31,14 @@ class Menu extends React.Component {
     }
 }
 class ModalLogin extends React.Component {
+    constructor(props) {
+        super(props)
+        this.login = props.name
+    }
     render() {
         return (
             <div className='modal'>
-                <p>Имя пользователя</p>
+                <p>{this.login}</p>
                 <p>email</p>
                 {/* <a href='#'>Выйти</a> */}
             </div>
@@ -42,10 +49,11 @@ class ModalRegistred extends React.Component {
     constructor(props) {
         super(props)
         this.fn = props.fn;
+        this.closeModal = props.closeModal
         this.state = { loginValid: '', passwordValid: '', disabledBtn: true }
     }
     sendForm = () => {
-        fetch('/form', {
+        fetch('/signUp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -57,8 +65,10 @@ class ModalRegistred extends React.Component {
         }).then((res) => res.json())
             .then((data) => {
                 console.log(data)
-                if (data.succes) {
+                if (!data.error) {
                     window.userSign = true;
+                    document.cookie = data.jwt;
+                    this.closeModal(data.name);
                 }
             })
     }
@@ -112,10 +122,11 @@ class ModalRegistred extends React.Component {
 class ModalDefault extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { loginValid: false, passwordValid: false, disabledBtn: true, showRegistr: false }
+        this.fn = props.fn
+        this.state = { loginValid: false, passwordValid: false, disabledBtn: true, showRegistr: false, message: '' }
     }
     sendForm = () => {
-        fetch('/form', {
+        fetch('/signIn', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -127,8 +138,12 @@ class ModalDefault extends React.Component {
         }).then((res) => res.json())
             .then((data) => {
                 console.log(data)
-                if (data.succes) {
+                if (!data.error) {
                     window.userSign = true;
+                    document.cookie = data.jwt;
+                    this.fn(data.name);
+                } else {
+                    this.setState({ message: data.message })
                 }
             })
     }
@@ -143,16 +158,20 @@ class ModalDefault extends React.Component {
         if (event.target.id === 'login') {
             obj = 'loginValid';
         }
+        console.log(this.state);
         if (event.target.value.length < 7) {
             event.target.classList.remove('text-field__input_valid')
             event.target.classList.add('text-field__input_invalid');
+            this.setState({ [obj]: false })
         } else {
             event.target.classList.remove('text-field__input_invalid');
             event.target.classList.add('text-field__input_valid');
             this.setState({ [obj]: true });
-            if (this.state.loginValid && this.state.passwordValid) {
-                this.setState({ disabledBtn: false })
-            }
+        }
+        if (this.state.loginValid && this.state.passwordValid) {
+            this.setState({ disabledBtn: false })
+        } else {
+            this.setState({ disabledBtn: true });
         }
     }
     render() {
@@ -160,6 +179,7 @@ class ModalDefault extends React.Component {
             <div className='modal modalDefault'>
                 <div className="text-field__wrapper">
                     <div className="text-field text-field_floating-2">
+                        <div className="text-field__message">{this.state.message}</div>
                         <input className="text-field__input" type="text" name="city" id="login" placeholder="Moscow" onChange={this.validateInput} />
                         <label className="text-field__label" htmlFor="city">Логин</label>
                     </div>
@@ -172,7 +192,7 @@ class ModalDefault extends React.Component {
                 </div>
                 <button onClick={this.sendForm} disabled={this.state.disabledBtn} id='btnSend'>Войти</button>
                 <button onClick={this.setVisReg}>Зарегестритоватся</button>
-                {this.state.showRegistr ? <ModalRegistred fn={this.callBack} /> : ''}
+                {this.state.showRegistr ? <ModalRegistred fn={this.callBack} closeModal={this.fn} /> : ''}
             </div>
         )
     }

@@ -3,6 +3,10 @@ import classes from './question.css';
 import Menu from './components/menu';
 
 class Question extends React.Component {
+    constructor(props){
+        super(props)
+        this.fn = props.fn;
+    }
     render() {
         return (
             <div className='container'>
@@ -15,7 +19,7 @@ class Question extends React.Component {
                     <QueBox num={'1'} />
                     <QueBox num={'2'} />
                     <div className='submitBox'>
-                        <button>Отправить ответы</button>
+                        <button  onClick={this.fn}>Отправить ответы</button>
                     </div>
                 </div>
             </div>
