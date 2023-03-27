@@ -22,7 +22,7 @@ class Menu extends React.Component {
     render() {
         return (
             <header>
-                <h1>Quiz</h1>
+                <a href='http://192.168.0.31:3000/'>Quiz</a>
                 <div onClick={this.setModal} className="profil">
                 </div>
                 {this.showModal(this.state.show)}

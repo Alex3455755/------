@@ -1,14 +1,72 @@
 :root {
     --main-color: darkorange;
-    --sub-color: rgb(214, 129, 26);
+    --sub-color: rgb(237, 72, 6);
     --main-font: "Montserrat";
 }
 * {
     margin: 0;
     padding: 0;
 }
-body {
-    font-family: var(--main-font);
+.titleCreate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.titleCreate >textarea{
+    text-align: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid var(--main-color);
+    width: 80%;
+    height: 40%;
+    font-size: xx-large;
+}
+.variants{
+    height: 70%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+#newQuestion input{
+    border-bottom: 1px solid var(--main-color);
+    width: 100%;
+    height: 20%;
+    font-size: 1em;
+}
+#newQuestion input::placeholder{
+    text-align: left;
+}
+#newQuestion input:focus{
+    outline: none;
+    border-bottom: 3px solid var(--sub-color);
+}
+#newQuestion{
+    box-sizing: border-box;
+    height: 600px;
+    padding: 30px 40px 20px 40px;
+}
+#newQuestion>button{
+    border: none;
+    font-size: larger;
+    color: white;
+    background-color: var(--main-color);
+    box-sizing: border-box;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+}
+#newQuestion>button:hover{
+    background-color: var(--sub-color);
+}
+.titleCreate >textarea::placeholder{
+    text-align: left;
+}
+.titleCreate>textarea:focus{
+    border-bottom: 2px solid var(--sub-color);
+    outline: none;
 }
 .main {
     min-height: 100vh;

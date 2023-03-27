@@ -7,12 +7,12 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const secret = 'bipE';
 
-const connection = mysql.createConnection({
+/* const connection = mysql.createConnection({
     host: "192.168.0.52",
     user: "laptop",
     database: "Quiz",
     password: "MySql:65108bipE;"
-});
+}); */
 
 app.post('/signIn', jsonParser, (req, res) => {
     const passwordInput = req.body.password;

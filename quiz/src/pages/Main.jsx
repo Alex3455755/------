@@ -11,11 +11,13 @@ class Main extends React.Component {
         <Menu />
         <button>+</button>
         <div className='lastQuiz'>
-        <p>Последние опросы</p>
-         <div>
+          <p>Последние опросы</p>
+          <div>
             <div></div>
             <div></div>
-         </div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
       </div>
     );

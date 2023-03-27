@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Main from './pages/Main';
 import Question from './pages/questionPage';
+import CreatePage from './pages/createQuiz';
 import {
   BrowserRouter as Router,
   Route, Routes
@@ -17,6 +18,7 @@ ReactDOM.createRoot(
     <Router>
       <div>
         <Routes>
+          <Route path='/createPage' element={<CreatePage />} />
           <Route path='/resultPage' element={<ResultPage />} />
           <Route path='/question' element={<Question />} />
           <Route path="/" element={<Main />} />

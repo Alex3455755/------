@@ -7,11 +7,14 @@
 input {
     border: none;
 }
-h1 {
+a {
     font-family: var(--main-font);
     color: var(--main-color);
+    text-decoration: none;
+    font-size: xx-large;
 }
 .container>button {
+    margin-left: 20px;
     color: var(--main-color);
     font-size: xx-large;
     background: white;
@@ -21,21 +24,24 @@ h1 {
     width: 50px;
     height: 50px;
     border-color: var(--main-color);
+    margin-top: 30px;
 }
 .lastQuiz{
     margin-top: 40px;
+    padding: 20px;
 }
 .lastQuiz >p{
     font-family: var(--main-font);
+    margin-bottom: 40px;
 }
 .lastQuiz>div{
     display: flex;
     padding-left: 20px;
 }
 .lastQuiz>div>div{
-    width: 80px;
+    width: 160px;
     margin-right: 20px;
     border: 1px solid var(--main-color);
     border-radius: 20px;
-    height: 100px;
+    height: 200px;
 }
