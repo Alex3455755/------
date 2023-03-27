@@ -50,7 +50,7 @@ class ModalRegistred extends React.Component {
         super(props)
         this.fn = props.fn;
         this.closeModal = props.closeModal
-        this.state = { loginValid: '', passwordValid: '', disabledBtn: true ,text: 'Пароль должен состоять из букв латинского алфавита цифр и специальных символов'}
+        this.state = { loginValid: '', passwordValid: '', disabledBtn: true, text: 'Пароль должен состоять из букв латинского алфавита цифр и специальных символов' }
     }
     sendForm = () => {
         fetch('/signUp', {
@@ -64,13 +64,12 @@ class ModalRegistred extends React.Component {
             }),
         }).then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 if (!data.error) {
                     window.userSign = true;
                     document.cookie = data.jwt;
                     this.closeModal(data.name);
-                }else{
-                    this.setState({text: data.message});
+                } else {
+                    this.setState({ text: data.message });
                 }
             })
     }
@@ -136,13 +135,12 @@ class ModalDefault extends React.Component {
             }),
         }).then((res) => res.json())
             .then((data) => {
-                console.log(data)
                 if (!data.error) {
                     window.userSign = true;
                     document.cookie = data.jwt;
                     this.fn(data.name);
                 } else {
-                    this.setState({ message: data.message })
+                    this.setState({ message: data.message });
                 }
             })
     }
@@ -175,9 +173,9 @@ class ModalDefault extends React.Component {
     render() {
         return (
             <div className='modal modalDefault'>
+                <div className="text-field__message">{this.state.message}</div>
                 <div className="text-field__wrapper">
                     <div className="text-field text-field_floating-2">
-                        <div className="text-field__message">{this.state.message}</div>
                         <input className="text-field__input" type="text" name="city" id="login" placeholder="Moscow" onChange={this.validateInput} />
                         <label className="text-field__label" htmlFor="city">Логин</label>
                     </div>

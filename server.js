@@ -15,11 +15,25 @@ const connection = mysql.createConnection({
 });
 
 app.post('/signIn', jsonParser, (req, res) => {
-    const password = req.body.password;
+    const passwordInput = req.body.password;
     const login = req.body.login;
     const token = jwt.sign({ name: login, role: 'user' }, secret, { expiresIn: '10min' });
-    res.json({ error: true, message: 'Неверный пароль или логин' })
-    console.log(req.body);
+    connection.query('SELECT name,password FROM users WHERE name=?', [login], (err, data) => {
+        if (data.length !== 0) {
+            argon2.verify(data[0].password, passwordInput)
+                .then((val) => {
+                    if (val) {
+                        const token = jwt.sign({ name: login, role: data[0].role, }, secret, { expiresIn: '10min' });
+                        res.json({ error: false, jwt: token, name: login });
+                    }
+                    else {
+                        res.json({ error: true, message: "неверный пароль" });
+                    }
+                });
+        }else{
+            res.json({ error: true, message: "Не зарегестрирован пользователь под таким логином" });
+        }
+    });
 });
 
 app.post('/signUp', jsonParser, (req, res) => {
