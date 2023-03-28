@@ -18,12 +18,10 @@ class CreatePage extends React.Component {
         let a = this.state.listCount.slice();
         obj.key = this.count
         this.count +=1
-        a.unshift(obj);
+        a.push(obj);
         this.helpMe(a)
     }
     render() {
-        console.log(this.state);
-        console.log(this.count);
         return (
             <div className='container'>
                 <div className='main'>
@@ -51,13 +49,13 @@ class NewQuestion extends React.Component {
     }
     handleChange = (event) => {
         switch (event.target) {
-            case document.getElementsByClassName(`${this.count}`).children[0]:
+            case document.querySelector(`.var` + this.count).children[0]:
                 this.setState({ A: event.target.value });
                 break
-            case document.querySelector('.' + this.count).children[1]:
+            case document.querySelector('.var' + this.count).children[1]:
                 this.setState({ B: event.target.value });
                 break
-            case document.querySelector('.' + this.count).children[2]:
+            case document.querySelector('.var' + this.count).children[2]:
                 this.setState({ C: event.target.value });
                 break
             default:
@@ -66,13 +64,13 @@ class NewQuestion extends React.Component {
         }
     }
     addQuestion = () => {
-        this.fn({ header: this.state.header, variants: { A: this.state.A, B: this.state.B, C: this.state.C },key:0 });
+        this.fn({ header: '', variants: { A: '', B: '', C: '' },key:0 });
     }
     render() {
         return (
             <div id='newQuestion'>
                 <input type='text' placeholder='Текст Вопроса' value={this.state.header} onChange={this.handleChange} />
-                <div className={'variants ' + this.count}>
+                <div className={'variants ' + `var` + this.count}>
                     <input placeholder='Вариант Ответа' value={this.state.A} onChange={this.handleChange} />
                     <input placeholder='Вариант Ответа' value={this.state.B} onChange={this.handleChange} />
                     <input placeholder='Вариант Ответа' value={this.state.C} onChange={this.handleChange} />
