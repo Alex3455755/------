@@ -6,34 +6,54 @@ class CreatePage extends React.Component {
         super(props)
         this.state = {
             listCount: [
-                { header: '', variants: { A: '', B: '', C: '' },key:0 },
+                { header: '', variants: { A: '', B: '', C: '' }, key: 0 },
             ]
         }
         this.count = 1
     }
-    helpMe =(obj) => {
-        this.setState({listCount: obj});
+    helpMe = (obj) => {
+        this.setState({ listCount: obj });
     }
     callBack = (obj) => {
-        let a = this.state.listCount.slice();
+        let a = this.state.listCount.slice(0,-1);
         obj.key = this.count
-        this.count +=1
         a.push(obj);
-        this.helpMe(a)
+        this.count += 1;
+        a.push({ header: '', variants: { A: '', B: '', C: '' }, key: this.count });
+        this.helpMe(a);
+    }
+    requestQuiz = () => {
+        let list = this.state.listCount;
+        if(this.state.listCount[this.state.listCount.length-1].header === ''){
+            list = this.state.listCount.slice(0,-1);
+        }
+        fetch('/createQuiz', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                header: document.getElementById('title').value,
+                quizList: list,
+            }),
+        }).then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+            })
     }
     render() {
         return (
             <div className='container'>
                 <div className='main'>
                     <div className='titleCreate'>
-                        <textarea type="text" max="100" placeholder='Название опроса не более 100 символов' />
+                        <textarea type="text" max="100" id='title' placeholder='Название опроса не более 100 символов' />
                     </div>
                     {this.state.listCount.map((item) => {
                         return (<NewQuestion key={item.key} count={this.count} header={item.header} fn={this.callBack}
                             A={item.variants.A} B={item.variants.B} C={item.variants.C} />);
                     })}
                     <div className='submitBox'>
-                        <button>Отправить ответы</button>
+                        <button onClick={this.requestQuiz}>Отправить ответы</button>
                     </div>
                 </div>
             </div>
@@ -64,7 +84,7 @@ class NewQuestion extends React.Component {
         }
     }
     addQuestion = () => {
-        this.fn({ header: '', variants: { A: '', B: '', C: '' },key:0 });
+        this.fn({ header: this.state.header, variants: { A: this.state.A, B: this.state.B, C: this.state.C }, key: 0 });
     }
     render() {
         return (

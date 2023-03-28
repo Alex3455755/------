@@ -36,6 +36,10 @@ app.post('/signIn', jsonParser, (req, res) => {
     });
 });
 
+app.post('/createQuiz',jsonParser,(req,res)=>{
+    console.dir(req.body.quizList[0].variants);
+});
+
 app.post('/signUp', jsonParser, (req, res) => {
     console.log(req.body)
     const password = req.body.password;
