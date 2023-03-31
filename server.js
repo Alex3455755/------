@@ -7,12 +7,12 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const secret = 'bipE';
 
-/* const connection = mysql.createConnection({
+const connection = mysql.createConnection({
     host: "192.168.0.52",
     user: "laptop",
     database: "Quiz",
     password: "MySql:65108bipE;"
-}); */
+});
 
 app.post('/signIn', jsonParser, (req, res) => {
     const passwordInput = req.body.password;
@@ -30,14 +30,29 @@ app.post('/signIn', jsonParser, (req, res) => {
                         res.json({ error: true, message: "неверный пароль" });
                     }
                 });
-        }else{
+        } else {
             res.json({ error: true, message: "Не зарегестрирован пользователь под таким логином" });
         }
     });
 });
 
-app.post('/createQuiz',jsonParser,(req,res)=>{
-    console.dir(req.body.quizList[0].variants);
+app.post('/authentication', jsonParser, (req, res) => {
+    jwt.verify(req.body.jwt, secret, (err, decoded) => {
+        if (err) {
+            res.json({ signIn: false });
+        } else {
+            res.json({signIn: true,name: decoded.name});
+        }
+    });
+})
+
+app.post('/createQuiz', jsonParser, (req, res) => {
+    console.log(JSON.stringify(req.body));
+    connection.query('INSERT quizis(header,test,author) VALUES(?,?)', [req.body.header,
+    JSON.stringify(req.body.quizList)], (err, data) => {
+        console.log(err);
+    })
+
 });
 
 app.post('/signUp', jsonParser, (req, res) => {
