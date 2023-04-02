@@ -7,12 +7,12 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const secret = 'bipE';
 
-const connection = mysql.createConnection({
+/* const connection = mysql.createConnection({
     host: "192.168.0.52",
     user: "laptop",
     database: "Quiz",
     password: "MySql:65108bipE;"
-});
+}); */
 
 app.post('/signIn', jsonParser, (req, res) => {
     const passwordInput = req.body.password;
@@ -47,11 +47,11 @@ app.post('/authentication', jsonParser, (req, res) => {
 })
 
 app.post('/createQuiz', jsonParser, (req, res) => {
-    console.log(JSON.stringify(req.body));
-    connection.query('INSERT quizis(header,test,author) VALUES(?,?)', [req.body.header,
+    console.log(req.body);
+    /* connection.query('INSERT quizis(header,test,author) VALUES(?,?)', [req.body.header,
     JSON.stringify(req.body.quizList)], (err, data) => {
         console.log(err);
-    })
+    }) */
 
 });
 
@@ -67,7 +67,7 @@ app.post('/signUp', jsonParser, (req, res) => {
                 .then((val) => {
                     connection.query('INSERT INTO users(name,password) VALUE(?,?)', [login, val]);
                 });
-            const token = jwt.sign({ name: login, role: 'user' }, secret, { expiresIn: '10min' });
+            const token = jwt.sign({ name: login, role: 'user' }, secret, { expiresIn: '20min' });
             res.json({ jwt: token, name: login, role: 'user', error: false });
         }
     });

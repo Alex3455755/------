@@ -9,23 +9,45 @@ class CreatePage extends React.Component {
                 { header: '', variants: { A: '', B: '', C: '' }, key: 0 },
             ]
         }
-        this.count = 1
+        this.count = 0
     }
     helpMe = (obj) => {
         this.setState({ listCount: obj });
     }
     callBack = (obj) => {
-        let a = this.state.listCount.slice(0,-1);
+        let a = this.state.listCount.slice(0, -1);
         obj.key = this.count
         a.push(obj);
-        this.count += 1;
+        this.count++
         a.push({ header: '', variants: { A: '', B: '', C: '' }, key: this.count });
         this.helpMe(a);
     }
+    callChange = (key, { target }) => {
+        const newList = this.state.listCount.map(elem => {
+            if (elem.key === key) {
+                switch (target) {
+                    case document.querySelector(`.var` + this.count).children[0]:
+                        elem.variants.A = target.value
+                        break
+                    case document.querySelector('.var' + this.count).children[1]:
+                        elem.variants.B = target.value
+                        break
+                    case document.querySelector('.var' + this.count).children[2]:
+                        elem.variants.C = target.value
+                        break
+                    default:
+                        elem.header = target.value
+                        break
+                }
+            }
+            return elem;
+        });
+        this.setState({listCount: newList});
+    }
     requestQuiz = () => {
         let list = this.state.listCount;
-        if(this.state.listCount[this.state.listCount.length-1].header === ''){
-            list = this.state.listCount.slice(0,-1);
+        if (this.state.listCount[this.state.listCount.length - 1].header === '') {
+            list = this.state.listCount.slice(0, -1);
         }
         fetch('/createQuiz', {
             method: 'POST',
@@ -50,7 +72,7 @@ class CreatePage extends React.Component {
                     </div>
                     {this.state.listCount.map((item) => {
                         return (<NewQuestion key={item.key} count={this.count} header={item.header} fn={this.callBack}
-                            A={item.variants.A} B={item.variants.B} C={item.variants.C} />);
+                            A={item.variants.A} B={item.variants.B} C={item.variants.C} callChange={this.callChange} keyProp={item.key} />);
                     })}
                     <div className='submitBox'>
                         <button onClick={this.requestQuiz}>Отправить ответы</button>
@@ -63,11 +85,14 @@ class CreatePage extends React.Component {
 class NewQuestion extends React.Component {
     constructor(props) {
         super(props)
+        this.callChange = props.callChange;
         this.fn = props.fn;
+        this.key = props.keyProp;
         this.count = props.count
         this.state = { header: props.header, A: props.A, B: props.B, C: props.C }
     }
     handleChange = (event) => {
+        this.callChange(this.key, event);
         switch (event.target) {
             case document.querySelector(`.var` + this.count).children[0]:
                 this.setState({ A: event.target.value });

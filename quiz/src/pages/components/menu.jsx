@@ -84,7 +84,7 @@ function ModalRegistred(props) {
             .then((data) => {
                 if (!data.error) {
                     window.userSign = true;
-                    document.cookie = data.jwt;
+                    document.cookie = `${data.jwt}; max-age=1200`;
                     props.closeModal(data.name);
                 } else {
                     setMessage(data.message)
