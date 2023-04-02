@@ -1,4 +1,6 @@
 import React from 'react';
+import Menu from './components/menu';
+import setings from '../setingsApp';
 
 
 class CreatePage extends React.Component {
@@ -49,7 +51,7 @@ class CreatePage extends React.Component {
         if (this.state.listCount[this.state.listCount.length - 1].header === '') {
             list = this.state.listCount.slice(0, -1);
         }
-        fetch('/createQuiz', {
+        fetch(setings.link + '/createQuiz', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -66,6 +68,7 @@ class CreatePage extends React.Component {
     render() {
         return (
             <div className='container'>
+                <Menu />
                 <div className='main'>
                     <div className='titleCreate'>
                         <textarea type="text" max="100" id='title' placeholder='Название опроса не более 100 символов' />
